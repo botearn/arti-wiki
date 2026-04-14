@@ -1,0 +1,29 @@
+{
+  "name": "arti-wiki",
+  "version": "1.0.0",
+  "description": "ARTI 是一个 AI 产品，致力于为用户提供智能化的数据洞察与决策支持。本仓库是 ARTI 项目的**唯一事实源**，所有产品决策、PRD、开发规范和讨论结论均在此留存。",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/botearn/arti-wiki.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/botearn/arti-wiki/issues"
+  },
+  "homepage": "https://github.com/botearn/arti-wiki#readme",
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}
