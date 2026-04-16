@@ -45,7 +45,7 @@ import {
 | ARTI记忆 | `CloudServerOutlined`            |
 
 约定：
-- **尺寸**：通过 `style={{ fontSize }}` 控制。侧边栏导航 = `18px`；正文内联 = `14-16px`；按钮 icon = `16px`。
+- **尺寸**：通过 `style=&#123;&#123; fontSize &#125;&#125;` 控制。侧边栏导航 = `18px`；正文内联 = `14-16px`；按钮 icon = `16px`。
 - **颜色**：通过 `color` 继承 `currentColor`，使用 `var(--arti-*)` 变量，禁止硬编码。
 - **变体**：优先使用 `*Outlined`（线性）风格；`*Filled` 仅用于强调/选中态；`*TwoTone` 慎用（需配合品牌色）。
 - **侧边栏导航图标与文字间距**：`10px`（见 §5 导航组件 & Figma node 103-266）。
