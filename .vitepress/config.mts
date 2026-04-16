@@ -66,6 +66,7 @@ export default defineConfig({
           { text: 'ARTI 商业计划', link: '/docs/reference/ARTI_Business_Plan' },
           { text: 'ARTI QA Memo', link: '/docs/reference/ARTI_QA_Memo' },
           { text: 'DESIGN 产品设计', link: '/docs/reference/DESIGN' },
+          { text: 'AI 数据源规划（三市版）', link: '/docs/reference/ai-datasource-exploration' },
           { text: 'Benchmark 设计', link: '/docs/reference/benchmark-design' },
           { text: 'Chat 系统参考', link: '/docs/reference/chat-system-reference' },
           { text: '数据 API', link: '/docs/reference/data-api' },

@@ -8,6 +8,7 @@
 - [ARTI 商业计划](./ARTI_Business_Plan)
 - [ARTI QA Memo](./ARTI_QA_Memo)
 - [DESIGN 产品设计总览](./DESIGN)
+- [AI 时代数据源规划（Exploration 三市版）](./ai-datasource-exploration)
 
 ### 架构与实现
 - [Benchmark 设计](./benchmark-design)
