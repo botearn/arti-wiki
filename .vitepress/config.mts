@@ -6,6 +6,8 @@ export default defineConfig({
   srcDir: '.',
   srcExclude: ['node_modules/**', '.vitepress/**'],
 
+  cleanUrls: true,
+
   lang: 'zh-CN',
 
   markdown: {
