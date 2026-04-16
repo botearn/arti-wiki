@@ -79,6 +79,76 @@ Prompt 文件：`supabase/functions/_shared/prompts/layer1/{agent}.ts`
 | 周期/底部/低估/钢铁 | marks + buffett |
 | 默认 | marks + dalio |
 
+## 斜杠命令调用链路速查
+
+命令 dispatch 入口：`src/hooks/use-agent-chat.ts:538`（`parseCommand` 解析后按 `command.name` 分发）。
+
+### 分析类
+
+| 命令 | 菜单名 | Handler | 前端动作 | 后端 Function | 同步/异步 | SSE |
+|------|--------|---------|----------|---------------|-----------|-----|
+| `/scan` | 快速诊断 | `handleScan` (L336) | `supabase.functions.invoke` | **scan-stock** | 同步（带前端 cache） | 否 |
+| `/quick` | 全景扫描 | `handleQuick` (L382) | `createTask(reportType="panorama")` | **generate-report** → Worker `panorama.py` | 异步（轮询 `report_tasks`） | 否 |
+| `/full` | 完整研报 | `handleAsyncTask` (L427) | `createTask(reportType="stock")`，`agents=[natasha,steve,tony,clint,sam,vision,thor,wanda]` | **generate-report** → Worker `main.py` | 异步 | 否 |
+| `/deep` | 圆桌辩论 | `handleDeep` (L471) | `runOrchestrator` | **orchestrator** | SSE 流式 | 是 |
+| `/portfolio` | 组合分析 | `handleAsyncTask` | `createTask`，`agents=[wanda]` | **generate-report** | 异步 | 否 |
+
+### 报告类（无需股票）
+
+| 命令 | Handler | 后端 Function | 说明 |
+|------|---------|---------------|------|
+| `/premarket` | `handleAsyncTask` | **generate-report**（reportType=`premarket`，symbol=`MARKET_PRE`） | 异步任务 |
+| `/postmarket` | `handleAsyncTask` | **generate-report**（reportType=`postmarket`，symbol=`MARKET_POST`） | 异步任务 |
+
+### 专家类（单 Agent）
+
+| 命令 | 菜单名 | AGENT_COMMANDS 映射 | 是否需 symbol |
+|------|--------|---------------------|---------------|
+| `/macro` | 宏观策略 | `agents=[natasha]` | 否 |
+| `/rotation` | 板块轮动 | `agents=[steve]` | 否 |
+| `/risk` | 风控评估 | `agents=[thor]` | 是 |
+| `/screen` | 量化选股 | `agents=[vision]` | 否 |
+| `/caps` | CAPS 评分 | `agents=[wanda]` | 是 |
+
+均走 `handleAsyncTask` → `createTask` → **generate-report**。
+
+### 隐藏命令（单分析师直调，不在 / 菜单展示）
+
+`/natasha` `/steve` `/tony` `/thor` `/clint` `/sam` `/vision` `/wanda` — 均 `handleAsyncTask` → **generate-report**，单 agent 执行。
+`/roundtable NVDA L2|L3` — `handleRoundtable` (L407) → `handleStreamChat` → **chat** Edge Function（SSE）。
+
+### 系统类
+
+| 命令 | 动作 | 后端 |
+|------|------|------|
+| `/clear` | `setMessages([])` + 清空本地 state | 无后端调用 |
+
+### 异步任务完整链路
+
+```
+前端 handleAsyncTask / handleQuick
+  └─ createTask()                                  [src/hooks/use-report-task.ts:124]
+       ├─ INSERT report_tasks (status=pending)
+       └─ triggerGenerate()                        [L29]
+            └─ supabase.functions.invoke("generate-report")
+                 ├─ 读 report_config.execution_engine
+                 ├─ "edge" → Edge Function 内部执行
+                 └─ "worker" → 触发 GitHub Actions（.github/workflows/report-worker.yml）
+                      └─ Python Worker 写回 report_tasks.result
+前端 useReportTask 轮询 report_tasks → 渲染 ReportCard
+```
+
+### /deep 完整链路
+
+```
+前端 handleDeep
+  └─ runOrchestrator(symbol, stockContext, callbacks, {layer1Agents, theme})
+       └─ fetch /functions/v1/orchestrator (SSE)
+            ├─ Layer 1: 7 位分析师并行（claude-sonnet-4-6）
+            ├─ Layer 2: 大师顺序辩论（claude-opus-4-6）
+            └─ Synthesizer: 最终裁定 → onSynthesis 回调
+```
+
 ## 报告类型与执行链路
 
 | 报告类型 | report_type | 分析师 | 大师 | HTML 模板 | Worker |
