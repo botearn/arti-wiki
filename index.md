@@ -71,14 +71,14 @@ features:
 
 ### PRD 产品需求
 
-- [PRD 目录](/docs/prd/README)
+- [PRD 目录](/docs/prd/)
 - [数据架构 PRD](/docs/prd/data-architecture)
 - [Pathfinder 功能 PRD](/docs/prd/pathfinder)
 - [定价设计 PRD](/docs/prd/pricing-design)
 
 ### 决策记录
 
-- [决策记录说明](/docs/decisions/README)
+- [决策记录说明](/docs/decisions/)
 - [2026-04-14 Repo 作为事实源](/docs/decisions/2026-04-14-repo-as-source-of-truth)
 
 ### 协作指南
@@ -92,7 +92,7 @@ features:
 
 ## 技术参考文档
 
-从 ARTI 主仓 `docs/` 同步的技术参考文档，涵盖战略、架构、数据、模型、前端等维度。完整目录见 [技术参考索引](/docs/reference/README)。
+从 ARTI 主仓 `docs/` 同步的技术参考文档，涵盖战略、架构、数据、模型、前端等维度。完整目录见 [技术参考索引](/docs/reference/)。
 
 ### 产品与战略
 
