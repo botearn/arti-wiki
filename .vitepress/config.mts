@@ -16,6 +16,7 @@ export default defineConfig({
       { text: 'PRD', link: '/docs/prd/' },
       { text: '决策记录', link: '/docs/decisions/' },
       { text: '协作指南', link: '/docs/guides/collaboration-guide' },
+      { text: '技术参考', link: '/docs/reference/' },
       { text: 'Sprint', link: '/sprint/2026-w16-progress' },
     ],
 
@@ -47,6 +48,25 @@ export default defineConfig({
         items: [
           { text: '协作规范', link: '/docs/guides/collaboration-guide' },
           { text: 'PRD 写作模板', link: '/docs/guides/prd-template' },
+        ],
+      },
+      {
+        text: '技术参考',
+        collapsed: true,
+        items: [
+          { text: '参考索引', link: '/docs/reference/' },
+          { text: 'ARTI 商业计划', link: '/docs/reference/ARTI_Business_Plan' },
+          { text: 'ARTI QA Memo', link: '/docs/reference/ARTI_QA_Memo' },
+          { text: 'DESIGN 产品设计', link: '/docs/reference/DESIGN' },
+          { text: 'Benchmark 设计', link: '/docs/reference/benchmark-design' },
+          { text: 'Chat 系统参考', link: '/docs/reference/chat-system-reference' },
+          { text: '数据 API', link: '/docs/reference/data-api' },
+          { text: '模型分层策略', link: '/docs/reference/model-strategy' },
+          { text: '输出模板汇总', link: '/docs/reference/output-templates' },
+          { text: 'Railway 迁移手册', link: '/docs/reference/railway-migration-runbook' },
+          { text: '前端 IA 审计', link: '/docs/reference/frontend-ia-audit' },
+          { text: 'Landing 设计系统', link: '/docs/reference/landing-design-system' },
+          { text: 'TODO 清单', link: '/docs/reference/TODO' },
         ],
       },
       {
