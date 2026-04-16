@@ -136,7 +136,7 @@
 
 | 场景 | 规则 |
 |------|------|
-| 进入动画 | `framer-motion` + `whileInView=&#123;&#123; opacity: 1, y: 0 &#125;&#125;` / `viewport=&#123;&#123; once: true, margin: "-80px" &#125;&#125;` / `duration: 0.4` |
+| 进入动画 | `framer-motion` + `whileInView={{ opacity: 1, y: 0 }}` / `viewport={{ once: true, margin: "-80px" }}` / `duration: 0.4` |
 | 卡片 hover | 仅 `transition-colors duration-300`，hover 时描金；**不要**叠加 scale + 阴影 |
 | 按钮 hover | `hover:opacity-90 hover:scale-[1.03]`（仅主 CTA，次要按钮只变色） |
 | Dialog / Modal | 只 fade，150ms，不做 slide / zoom（已在 `ui/dialog.tsx` 精简） |

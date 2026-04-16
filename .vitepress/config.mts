@@ -8,6 +8,14 @@ export default defineConfig({
 
   lang: 'zh-CN',
 
+  markdown: {
+    config: (md) => {
+      md.renderer.rules.code_inline = (tokens, idx) => {
+        return `<code v-pre>${md.utils.escapeHtml(tokens[idx].content)}</code>`
+      }
+    },
+  },
+
   themeConfig: {
     siteTitle: 'ARTI Wiki',
 
